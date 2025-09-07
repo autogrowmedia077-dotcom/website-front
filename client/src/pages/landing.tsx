@@ -27,7 +27,15 @@ import CountdownTimer from "@/components/countdown-timer";
 import TestimonialSlider from "@/components/testimonial-slider";
 import FaqSection from "@/components/faq-section";
 import { useState, useEffect } from "react";
-
+const loadRazorpayScript = () => {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+};
 export default function Landing() {
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -45,7 +53,59 @@ export default function Landing() {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
+  const handlePayment = async () => {
+    const res = await loadRazorpayScript();
+  
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+  
+    try {
+      // 1. Create order on backend
+      const orderRes = await fetch("http://localhost:5000/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: 399 }),
+      });
+      const orderData = await orderRes.json();
+  
+      const options = {
+        key: "rzp_test_u7t6zEMNRtcXwt", // Your key
+        amount: orderData.amount,
+        currency: orderData.currency,
+        name: "PinnaclePlus",
+        description: "Complete Automation Package",
+        order_id: orderData.orderId,
+        handler: async function (response: any) {
+          // 2. Verify payment on backend
+          const verifyRes = await fetch("http://localhost:5000/verify", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(response), // razorpay_order_id, razorpay_payment_id, razorpay_signature
+          });
+  
+          const verifyData = await verifyRes.json();
+  
+          if (verifyData.status === "success") {
+            // 3. Redirect on successful verification
+            window.location.href = "https://app-pinnacleplus.store";
+          } else {
+            alert("Payment verification failed!");
+          }
+        },
+        prefill: { name: "", email: "", contact: "" },
+        theme: { color: "#4f46e5" },
+      };
+  
+      const paymentObject = new (window as any).Razorpay(options);
+      paymentObject.open();
+    } catch (err) {
+      console.error(err);
+      alert("Payment failed. Try again.");
+    }
+  };
+  
   const features = [
     {
       icon: Bot,
@@ -108,7 +168,7 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <div className="text-xl font-bold text-gradient" data-testid="logo">AutomationPro</div>
+              <div className="text-xl font-bold text-gradient" data-testid="logo">PinnaclePlus</div>
             </div>
             <div className="hidden md:flex items-center space-x-8">
               <button 
@@ -140,9 +200,7 @@ export default function Landing() {
                 FAQ
               </button>
             </div>
-            <Button className="gradient-primary text-white hover-glow text-sm sm:text-base px-4 sm:px-6" data-testid="nav-cta">
-              💰 Get ₹399 Now!
-            </Button>
+            
           </div>
         </div>
       </motion.nav>
@@ -204,7 +262,9 @@ export default function Landing() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             data-testid="hero-subtitle"
-          >
+          >Turn Your Social Media Into a
+          ₹1 Lakh+/Month Business
+          The exact automation system that helped 5,000+ entrepreneurs build
             The exact automation system that helped 5,000+ entrepreneurs build profitable online businesses. Complete setup in 24 hours, results guaranteed in 90 days.
           </motion.p>
 
@@ -237,6 +297,7 @@ export default function Landing() {
             <Button 
               className="gradient-primary text-white px-8 sm:px-12 py-3 sm:py-4 text-lg sm:text-xl font-bold hover-glow transform transition-all duration-300 hover:scale-105 w-full sm:w-auto max-w-sm sm:max-w-none"
               data-testid="hero-cta"
+              onClick={handlePayment}
             >
               💰 Get ₹399 Package Now!
             </Button>
@@ -380,7 +441,7 @@ export default function Landing() {
                   <div className="text-left">
                     <h4 className="font-semibold mb-3 text-green-400">✓ Complete Automation System:</h4>
                     <ul className="space-y-2 text-sm text-muted-foreground ml-4">
-                      <li>• AI content creation (30+ posts/day)</li>
+                      <li>• AI content creation (2 posts/day)</li>
                       <li>• Multi-platform posting automation</li>
                       <li>• Advanced analytics & growth tracking</li>
                     </ul>
@@ -404,9 +465,7 @@ export default function Landing() {
                   <div className="text-left border-t border-green-500/20 pt-4">
                     <h4 className="font-semibold mb-3 text-yellow-400">🛡️ Risk-Free Guarantee:</h4>
                     <ul className="space-y-2 text-sm text-muted-foreground ml-4">
-                      <li>• 90-day money-back guarantee</li>
-                      <li>• If you don't see 300%+ ROI, full refund</li>
-                      <li>• No questions asked policy</li>
+                
                     </ul>
                   </div>
                 </div>
@@ -418,7 +477,7 @@ export default function Landing() {
                   </div>
                 </div>
 
-                <Button className="w-full gradient-primary text-white py-3 sm:py-4 text-lg sm:text-xl font-bold hover-glow transform transition-all duration-300 hover:scale-105 mb-4" data-testid="pricing-cta">
+                <Button className="w-full gradient-primary text-white py-3 sm:py-4 text-lg sm:text-xl font-bold hover-glow transform transition-all duration-300 hover:scale-105 mb-4" data-testid="pricing-cta"  onClick={handlePayment}>
                   💰 Get Complete System For ₹399
                 </Button>
 
@@ -497,8 +556,14 @@ export default function Landing() {
                   </div>
                 </div>
 
-                <Button className="gradient-primary text-white px-8 sm:px-12 py-3 sm:py-4 text-lg sm:text-xl font-bold hover-glow transform transition-all duration-300 hover:scale-105 mb-6 w-full sm:w-auto" data-testid="final-cta-button">
-                  🚀 Secure My ₹399 Spot Now (47 Left)
+                <Button className="gradient-primary text-white px-4 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg font-bold hover-glow transform transition-all duration-300 hover:scale-105 mb-6 w-full sm:w-auto" data-testid="final-cta-button" onClick={handlePayment}>
+                  <span className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2">
+                    <span className="flex items-center gap-2">
+                      <span>🚀</span>
+                      <span>Secure My ₹399 Spot Now</span>
+                    </span>
+                    <span className="text-xs sm:text-sm opacity-90"></span>
+                  </span>
                 </Button>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-8 text-sm text-muted-foreground mb-4">
@@ -528,7 +593,7 @@ export default function Landing() {
       <footer className="py-12 px-4 sm:px-6 lg:px-8 border-t border-border">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
-            <div className="text-2xl font-bold text-gradient mb-4" data-testid="footer-logo">AutomationPro</div>
+            <div className="text-2xl font-bold text-gradient mb-4" data-testid="footer-logo">PinnaclePlus</div>
             <p className="text-muted-foreground mb-6">Transform your digital presence with automated growth solutions</p>
             
             <div className="flex justify-center space-x-6 mb-8">
@@ -547,20 +612,41 @@ export default function Landing() {
             </div>
             
             <div className="text-muted-foreground text-sm" data-testid="footer-copyright">
-              © 2025 AutomationPro | Built with ❤️ | All rights reserved
+              © 2025 PinnaclePlus | Built with ❤️ by Vedant Chalke | All rights reserved
+            </div>
+
+            {/* Business Info */}
+            <div className="mt-10 max-w-2xl mx-auto text-left sm:text-center">
+              <div className="glass-card border border-border/50 rounded-xl p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-bold mb-2">GADGET GLITZ</h3>
+                <p className="text-sm text-muted-foreground mb-4">Mobile Accessories Store</p>
+                <p className="text-sm text-muted-foreground mb-4">Your trusted partner in digital transformation and social media automation</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                  <div className="flex items-start space-x-2">
+                    <span role="img" aria-label="store">🏪</span>
+                    <span>Visit Our Store</span>
+                  </div>
+                  <div className="flex items-start space-x-2">
+                    <span role="img" aria-label="address">📍</span>
+                    <span>31, Indra Market</span>
+                  </div>
+                  <div className="flex items-start space-x-2">
+                    <span role="img" aria-label="city">🏙️</span>
+                    <span>Jabalpur, Madhya Pradesh</span>
+                  </div>
+                  <div className="flex items-start space-x-2">
+                    <span role="img" aria-label="pincode">📮</span>
+                    <span>482001</span>
+                  </div>
+                </div>
+                <div className="text-xs text-muted-foreground mt-3">Established business expanding into digital services</div>
+              </div>
             </div>
           </div>
         </div>
       </footer>
 
-      {/* Mobile Sticky CTA */}
-      <div className="fixed bottom-0 left-0 right-0 md:hidden sticky-cta z-50">
-        <div className="p-3">
-          <Button className="w-full gradient-primary text-white py-3 font-bold text-base" data-testid="mobile-sticky-cta">
-            💰 Get ₹399 Package Now!
-          </Button>
-        </div>
-      </div>
+      
     </div>
   );
 }

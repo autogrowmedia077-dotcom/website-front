@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Star } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const testimonials = [
@@ -52,61 +52,130 @@ export default function TestimonialSlider() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-    }, 4000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
 
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
+    );
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+
   return (
-    <div className="fade-edges overflow-hidden px-4 sm:px-0" data-testid="testimonial-slider">
-      <motion.div 
-        className="flex space-x-4 sm:space-x-8"
-        animate={{ x: -currentIndex * (320 + 16) }} // Adjusted for mobile
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-      >
-        {testimonials.map((testimonial, index) => (
+    <div className="relative w-full px-4 sm:px-0" data-testid="testimonial-slider">
+      {/* Main testimonial display */}
+      <div className="relative overflow-hidden">
+        <AnimatePresence mode="wait">
           <motion.div
-            key={index}
-            className="min-w-[320px] sm:min-w-[450px]"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: index * 0.2 }}
-            viewport={{ once: true }}
-            data-testid={`testimonial-${index}`}
+            key={currentIndex}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="w-full"
           >
-            <Card className="glass-card p-4 sm:p-8 h-full border border-green-500/20">
+            <Card className="glass-card p-4 sm:p-8 border border-green-500/20 mx-auto max-w-2xl">
               <CardContent className="p-0">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 space-y-2 sm:space-y-0">
-                  <div className="flex items-center">
-                    <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r ${testimonial.gradient} rounded-full flex items-center justify-center`}>
-                      <span className="text-white font-bold text-sm sm:text-base">{testimonial.initials}</span>
+                {/* Mobile-optimized header */}
+                <div className="flex flex-col space-y-4 mb-6">
+                  {/* User info - mobile stacked */}
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r ${testimonials[currentIndex].gradient} rounded-full flex items-center justify-center flex-shrink-0`}>
+                      <span className="text-white font-bold text-base sm:text-xl">{testimonials[currentIndex].initials}</span>
                     </div>
-                    <div className="ml-3 sm:ml-4">
-                      <div className="font-semibold text-sm sm:text-base">{testimonial.name}</div>
-                      <div className="text-xs sm:text-sm text-muted-foreground">{testimonial.role}</div>
-                      <div className="text-xs text-muted-foreground">{testimonial.location}</div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-base sm:text-xl truncate">{testimonials[currentIndex].name}</div>
+                      <div className="text-xs sm:text-base text-muted-foreground truncate">{testimonials[currentIndex].role}</div>
+                      <div className="text-xs sm:text-sm text-muted-foreground">{testimonials[currentIndex].location}</div>
                     </div>
                   </div>
-                  <div className="text-left sm:text-right">
-                    <div className="text-xl sm:text-2xl font-bold text-green-400">{testimonial.revenue}</div>
-                    <div className="text-xs text-muted-foreground">in {testimonial.timeframe}</div>
+                  
+                  {/* Revenue - mobile centered */}
+                  <div className="text-center sm:text-right">
+                    <div className="text-xl sm:text-3xl font-bold text-green-400">{testimonials[currentIndex].revenue}</div>
+                    <div className="text-sm sm:text-base text-muted-foreground">in {testimonials[currentIndex].timeframe}</div>
                   </div>
                 </div>
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                  ))}
-                  <span className="ml-2 text-sm text-muted-foreground">Verified Purchase</span>
+                
+                {/* Rating - mobile centered */}
+                <div className="flex items-center justify-center sm:justify-start mb-4">
+                  <div className="flex items-center space-x-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <span className="ml-2 text-xs sm:text-base text-muted-foreground font-medium">Verified</span>
                 </div>
-                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{testimonial.content}</p>
-                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-border">
-                  <div className="text-xs sm:text-sm text-green-400 font-semibold">✓ Results verified by our team</div>
+                
+                {/* Testimonial content - mobile optimized */}
+                <blockquote className="text-sm sm:text-lg text-muted-foreground leading-relaxed mb-6 text-center sm:text-left">
+                  "{testimonials[currentIndex].content}"
+                </blockquote>
+                
+                {/* Verification badge - mobile centered */}
+                <div className="pt-4 border-t border-border">
+                  <div className="flex items-center justify-center sm:justify-start text-xs sm:text-base text-green-400 font-semibold">
+                    <span className="mr-1 sm:mr-2">✓</span>
+                    Results verified by our team
+                  </div>
                 </div>
               </CardContent>
             </Card>
           </motion.div>
-        ))}
-      </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Mobile-optimized navigation */}
+      <div className="flex items-center justify-center mt-6 sm:mt-8 space-x-3 sm:space-x-4">
+        <button
+          onClick={goToPrevious}
+          className="p-2 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors touch-manipulation"
+          aria-label="Previous testimonial"
+        >
+          <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+        </button>
+        
+        {/* Dots indicator - mobile optimized */}
+        <div className="flex space-x-1.5 sm:space-x-2">
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all touch-manipulation ${
+                index === currentIndex 
+                  ? 'bg-green-400 scale-125' 
+                  : 'bg-white/30 hover:bg-white/50'
+              }`}
+              aria-label={`Go to testimonial ${index + 1}`}
+            />
+          ))}
+        </div>
+        
+        <button
+          onClick={goToNext}
+          className="p-2 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors touch-manipulation"
+          aria-label="Next testimonial"
+        >
+          <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+        </button>
+      </div>
+
+      {/* Mobile-optimized counter */}
+      <div className="text-center mt-3 sm:mt-4">
+        <span className="text-xs sm:text-sm text-muted-foreground">
+          {currentIndex + 1} of {testimonials.length}
+        </span>
+      </div>
     </div>
   );
 }
