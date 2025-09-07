@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(240, 10%, 4%);
+  --foreground: hsl(240, 5%, 96%);
+  --card: hsl(240, 4%, 8%);
+  --card-foreground: hsl(240, 5%, 96%);
+  --popover: hsl(240, 4%, 8%);
+  --popover-foreground: hsl(240, 5%, 96%);
+  --primary: hsl(262, 83%, 58%);
+  --primary-foreground: hsl(240, 5%, 96%);
+  --secondary: hsl(240, 4%, 16%);
+  --secondary-foreground: hsl(240, 5%, 96%);
+  --muted: hsl(240, 4%, 16%);
+  --muted-foreground: hsl(240, 5%, 64%);
+  --accent: hsl(142, 76%, 36%);
+  --accent-foreground: hsl(240, 5%, 96%);
+  --destructive: hsl(0, 62%, 60%);
+  --destructive-foreground: hsl(240, 5%, 96%);
+  --border: hsl(240, 6%, 20%);
+  --input: hsl(240, 4%, 16%);
+  --ring: hsl(262, 83%, 58%);
+  --chart-1: hsl(262, 83%, 58%);
+  --chart-2: hsl(142, 76%, 36%);
+  --chart-3: hsl(45, 93%, 56%);
+  --chart-4: hsl(147, 78%, 42%);
+  --chart-5: hsl(341, 75%, 51%);
+  --sidebar: hsl(240, 4%, 8%);
+  --sidebar-foreground: hsl(240, 5%, 96%);
+  --sidebar-primary: hsl(262, 83%, 58%);
+  --sidebar-primary-foreground: hsl(240, 5%, 96%);
+  --sidebar-accent: hsl(240, 4%, 16%);
+  --sidebar-accent-foreground: hsl(262, 83%, 58%);
+  --sidebar-border: hsl(240, 6%, 20%);
+  --sidebar-ring: hsl(262, 83%, 58%);
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --radius: 0.75rem;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-card-bg: rgba(255, 255, 255, 0.03);
+  --glass-card-border: rgba(255, 255, 255, 0.08);
+  --gradient-primary: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
+  --gradient-accent: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  --glow-primary: 0 0 40px rgba(139, 92, 246, 0.3);
+  --glow-accent: 0 0 40px rgba(16, 185, 129, 0.3);
+}
+
+.dark {
+  --background: hsl(240, 10%, 4%);
+  --foreground: hsl(240, 5%, 96%);
+  --card: hsl(240, 4%, 8%);
+  --card-foreground: hsl(240, 5%, 96%);
+  --popover: hsl(240, 4%, 8%);
+  --popover-foreground: hsl(240, 5%, 96%);
+  --primary: hsl(262, 83%, 58%);
+  --primary-foreground: hsl(240, 5%, 96%);
+  --secondary: hsl(240, 4%, 16%);
+  --secondary-foreground: hsl(240, 5%, 96%);
+  --muted: hsl(240, 4%, 16%);
+  --muted-foreground: hsl(240, 5%, 64%);
+  --accent: hsl(142, 76%, 36%);
+  --accent-foreground: hsl(240, 5%, 96%);
+  --destructive: hsl(0, 62%, 60%);
+  --destructive-foreground: hsl(240, 5%, 96%);
+  --border: hsl(240, 6%, 20%);
+  --input: hsl(240, 4%, 16%);
+  --ring: hsl(262, 83%, 58%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+  }
+
+  .glass-card {
+    background: var(--glass-card-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-card-border);
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+
+  .glow-accent {
+    box-shadow: var(--glow-accent);
+  }
+
+  .hover-glow {
+    transition: all 0.3s ease;
+  }
+
+  .hover-glow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(139, 92, 246, 0.4);
+  }
+
+  .countdown-digit {
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+  }
+
+  .sticky-cta {
+    backdrop-filter: blur(20px);
+    background: rgba(10, 10, 10, 0.95);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .fade-edges {
+    position: relative;
+  }
+
+  .fade-edges::before,
+  .fade-edges::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .fade-edges::before {
+    left: 0;
+    background: linear-gradient(to right, var(--background), transparent);
+  }
+
+  .fade-edges::after {
+    right: 0;
+    background: linear-gradient(to left, var(--background), transparent);
+  }
+}
+
+@layer utilities {
+  .mobile-hidden {
+    @apply md:block hidden;
+  }
+}
