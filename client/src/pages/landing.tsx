@@ -163,6 +163,28 @@ export default function Landing() {
             <span className="text-sm font-semibold text-yellow-400">87% OFF - LIMITED TIME ONLY</span>
           </motion.div>
 
+          {/* Trust Indicators */}
+          <motion.div 
+            className="flex justify-center items-center space-x-8 mb-8 text-sm text-muted-foreground"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            data-testid="trust-indicators"
+          >
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+              <span>5,000+ Active Users</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+              <span>98% Success Rate</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+              <span>₹50L+ Revenue Generated</span>
+            </div>
+          </motion.div>
+
           {/* Main Headline */}
           <motion.h1 
             className="text-4xl sm:text-6xl lg:text-7xl font-black mb-6"
@@ -171,20 +193,19 @@ export default function Landing() {
             transition={{ duration: 0.8, delay: 0.1 }}
             data-testid="hero-headline"
           >
-            Complete <span className="text-gradient">Automation</span><br />
-            Package for Digital<br />
-            <span className="text-gradient">Growth</span>
+            Turn Your Social Media Into a<br />
+            <span className="text-gradient">₹1 Lakh+/Month</span> Business
           </motion.h1>
 
           {/* Subheadline */}
           <motion.p 
-            className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto"
+            className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             data-testid="hero-subtitle"
           >
-            Transform your digital presence with automated content creation, multi-platform optimization, and 24/7 growth tracking. Everything you need to scale your online business.
+            The exact automation system that helped 5,000+ entrepreneurs build profitable online businesses. Complete setup in 24 hours, results guaranteed in 90 days.
           </motion.p>
 
           {/* Price Comparison */}
@@ -222,15 +243,15 @@ export default function Landing() {
             <div className="flex items-center justify-center space-x-6 text-sm text-muted-foreground flex-wrap gap-4">
               <div className="flex items-center space-x-2">
                 <Shield className="w-4 h-4 text-green-400" />
-                <span>90-Day Money Back</span>
+                <span>90-Day Money Back Guarantee</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Zap className="w-4 h-4 text-yellow-400" />
-                <span>Instant Access</span>
+                <span>Setup Complete in 24 Hours</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Infinity className="w-4 h-4 text-blue-400" />
-                <span>Lifetime Access</span>
+                <span>Personal Success Coach Included</span>
               </div>
             </div>
           </motion.div>
@@ -262,10 +283,10 @@ export default function Landing() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl sm:text-5xl font-black mb-6" data-testid="features-title">
-              Everything You Need to <span className="text-gradient">Dominate</span>
+              The Complete <span className="text-gradient">Business-in-a-Box</span> Solution
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Our complete automation package includes all the tools and strategies you need to scale your digital presence effortlessly.
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
+              Everything successful entrepreneurs use to build ₹1+ lakh monthly businesses. No guesswork, no trial and error – just the proven system that works.
             </p>
           </motion.div>
 
@@ -325,9 +346,18 @@ export default function Landing() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl sm:text-5xl font-black mb-6" data-testid="pricing-title">
-              Simple, <span className="text-gradient">Transparent</span> Pricing
+              Get Everything For Less Than <span className="text-gradient">One Day's Earnings</span>
             </h2>
-            <p className="text-xl text-muted-foreground mb-16">One-time payment, lifetime access. No hidden fees, no monthly subscriptions.</p>
+            <p className="text-xl text-muted-foreground mb-8">Pay once, earn forever. Our customers typically recover this investment in their first week.</p>
+            
+            <div className="glass-card p-6 rounded-lg mb-16 max-w-2xl mx-auto">
+              <div className="text-center">
+                <div className="text-lg font-semibold text-green-400 mb-2">⚡ What Others Are Saying Right Now:</div>
+                <div className="text-muted-foreground text-sm">"Made ₹15,000 in my first month alone" - Rahul M.</div>
+                <div className="text-muted-foreground text-sm">"ROI was 3800% in 90 days" - Sneha K.</div>
+                <div className="text-muted-foreground text-sm">"Quit my job after 6 months" - Amit P.</div>
+              </div>
+            </div>
 
             <Card className="glass-card p-8 border-2 border-primary glow-primary max-w-lg mx-auto" data-testid="pricing-card">
               <CardContent className="p-0">
