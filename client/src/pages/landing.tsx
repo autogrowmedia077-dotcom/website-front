@@ -473,11 +473,17 @@ export default function Landing() {
             <Card className="glass-card p-12" data-testid="final-cta">
               <CardContent className="p-0">
                 <h2 className="text-4xl sm:text-5xl font-black mb-6">
-                  Ready to <span className="text-gradient">Transform</span> Your Digital Presence?
+                  Last Chance: <span className="text-gradient">₹399 Price</span> Expires Tonight
                 </h2>
-                <p className="text-xl text-muted-foreground mb-8">
-                  Join thousands of successful entrepreneurs who've automated their way to digital success. Don't let this limited-time offer slip away.
+                <p className="text-xl text-muted-foreground mb-4">
+                  5,000+ entrepreneurs are already using this system to earn ₹1+ lakh monthly. The question is: will you be next?
                 </p>
+                <div className="glass-card p-4 rounded-lg mb-8 max-w-xl mx-auto">
+                  <div className="text-center">
+                    <div className="text-sm text-red-400 font-semibold mb-2">⚠️ PRICE INCREASE ALERT</div>
+                    <div className="text-xs text-muted-foreground">After tonight, this package will cost ₹2,999. Secure your ₹399 access now.</div>
+                  </div>
+                </div>
 
                 <div className="flex items-center justify-center space-x-4 mb-8">
                   <div className="text-center">
@@ -492,22 +498,25 @@ export default function Landing() {
                 </div>
 
                 <Button className="gradient-primary text-white px-12 py-4 text-xl font-bold hover-glow transform transition-all duration-300 hover:scale-105 mb-6" data-testid="final-cta-button">
-                  💰 Get ₹399 Package Now!
+                  🚀 Secure My ₹399 Spot Now (47 Left)
                 </Button>
 
-                <div className="flex items-center justify-center space-x-8 text-sm text-muted-foreground flex-wrap gap-4">
+                <div className="flex items-center justify-center space-x-8 text-sm text-muted-foreground flex-wrap gap-4 mb-4">
                   <div className="flex items-center space-x-2">
                     <Shield className="w-4 h-4 text-green-400" />
-                    <span>90-Day Money Back</span>
+                    <span>90-Day Money Back + ₹5K</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Zap className="w-4 h-4 text-yellow-400" />
-                    <span>Instant Access</span>
+                    <span>Setup in 24 Hours</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Infinity className="w-4 h-4 text-blue-400" />
-                    <span>Lifetime Support</span>
+                    <span>Personal Coach Included</span>
                   </div>
+                </div>
+                <div className="text-center text-xs text-red-400 font-semibold animate-pulse">
+                  ⏰ Timer: Price increases to ₹2,999 in 11 hours 47 minutes
                 </div>
               </CardContent>
             </Card>
