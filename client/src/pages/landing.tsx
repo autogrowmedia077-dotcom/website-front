@@ -140,8 +140,8 @@ export default function Landing() {
                 FAQ
               </button>
             </div>
-            <Button className="gradient-primary text-white hover-glow" data-testid="nav-cta">
-              💰 Get ₹399 Package Now!
+            <Button className="gradient-primary text-white hover-glow text-sm sm:text-base px-4 sm:px-6" data-testid="nav-cta">
+              💰 Get ₹399 Now!
             </Button>
           </div>
         </div>
@@ -165,7 +165,7 @@ export default function Landing() {
 
           {/* Trust Indicators */}
           <motion.div 
-            className="flex justify-center items-center space-x-8 mb-8 text-sm text-muted-foreground"
+            className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-8 mb-8 text-sm text-muted-foreground"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -181,25 +181,25 @@ export default function Landing() {
             </div>
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-              <span>₹50L+ Revenue Generated</span>
+              <span className="text-center">₹50L+ Revenue Generated</span>
             </div>
           </motion.div>
 
           {/* Main Headline */}
           <motion.h1 
-            className="text-4xl sm:text-6xl lg:text-7xl font-black mb-6"
+            className="text-3xl sm:text-5xl lg:text-7xl font-black mb-6 leading-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
             data-testid="hero-headline"
           >
-            Turn Your Social Media Into a<br />
-            <span className="text-gradient">₹1 Lakh+/Month</span> Business
+            Turn Your Social Media Into a<br className="hidden sm:block" />
+            <span className="block sm:inline"><span className="text-gradient">₹1 Lakh+/Month</span> Business</span>
           </motion.h1>
 
           {/* Subheadline */}
           <motion.p 
-            className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-4xl mx-auto"
+            className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-8 max-w-4xl mx-auto px-4 sm:px-0"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -210,19 +210,19 @@ export default function Landing() {
 
           {/* Price Comparison */}
           <motion.div 
-            className="flex items-center justify-center space-x-4 mb-8"
+            className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
             data-testid="price-comparison"
           >
             <div className="text-center">
-              <div className="text-2xl text-muted-foreground line-through">₹2,999</div>
+              <div className="text-xl sm:text-2xl text-muted-foreground line-through">₹2,999</div>
               <div className="text-sm text-muted-foreground">Regular Price</div>
             </div>
-            <ArrowRight className="w-8 h-8 text-muted-foreground" />
-            <div className="text-center glass-card p-6 rounded-xl glow-primary">
-              <div className="text-5xl font-black text-gradient">₹399</div>
+            <ArrowRight className="w-6 h-6 sm:w-8 sm:h-8 text-muted-foreground rotate-90 sm:rotate-0" />
+            <div className="text-center glass-card p-4 sm:p-6 rounded-xl glow-primary">
+              <div className="text-4xl sm:text-5xl font-black text-gradient">₹399</div>
               <div className="text-sm text-green-400 font-semibold">87% OFF TODAY</div>
             </div>
           </motion.div>
@@ -235,12 +235,12 @@ export default function Landing() {
             transition={{ duration: 0.8, delay: 0.7 }}
           >
             <Button 
-              className="gradient-primary text-white px-12 py-4 text-xl font-bold hover-glow transform transition-all duration-300 hover:scale-105"
+              className="gradient-primary text-white px-8 sm:px-12 py-3 sm:py-4 text-lg sm:text-xl font-bold hover-glow transform transition-all duration-300 hover:scale-105 w-full sm:w-auto max-w-sm sm:max-w-none"
               data-testid="hero-cta"
             >
               💰 Get ₹399 Package Now!
             </Button>
-            <div className="flex items-center justify-center space-x-6 text-sm text-muted-foreground flex-wrap gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-6 text-sm text-muted-foreground">
               <div className="flex items-center space-x-2">
                 <Shield className="w-4 h-4 text-green-400" />
                 <span>90-Day Money Back Guarantee</span>
@@ -282,15 +282,15 @@ export default function Landing() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl sm:text-5xl font-black mb-6" data-testid="features-title">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-6 px-4 sm:px-0" data-testid="features-title">
               The Complete <span className="text-gradient">Business-in-a-Box</span> Solution
             </h2>
-            <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-4xl mx-auto px-4 sm:px-0">
               Everything successful entrepreneurs use to build ₹1+ lakh monthly businesses. No guesswork, no trial and error – just the proven system that works.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-4 sm:px-0">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -301,13 +301,13 @@ export default function Landing() {
                 whileHover={{ y: -5 }}
                 data-testid={`feature-card-${index}`}
               >
-                <Card className="glass-card p-8 h-full hover-glow">
+                <Card className="glass-card p-6 sm:p-8 h-full hover-glow">
                   <CardContent className="p-0">
-                    <div className="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center mb-6">
+                    <div className="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center mb-4 sm:mb-6">
                       <feature.icon className="w-6 h-6 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
-                    <p className="text-muted-foreground">{feature.description}</p>
+                    <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">{feature.title}</h3>
+                    <p className="text-sm sm:text-base text-muted-foreground">{feature.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -326,10 +326,10 @@ export default function Landing() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl sm:text-5xl font-black mb-6" data-testid="testimonials-title">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-6 px-4 sm:px-0" data-testid="testimonials-title">
               Real Results From <span className="text-gradient">Real People</span>
             </h2>
-            <p className="text-xl text-muted-foreground mb-4">5,000+ entrepreneurs earning ₹1+ lakh monthly with our system</p>
+            <p className="text-lg sm:text-xl text-muted-foreground mb-4 px-4 sm:px-0">5,000+ entrepreneurs earning ₹1+ lakh monthly with our system</p>
             <div className="inline-flex items-center space-x-2 glass-card px-4 py-2 rounded-full">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
               <span className="text-sm text-green-400 font-semibold">All results independently verified</span>
@@ -349,10 +349,10 @@ export default function Landing() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl sm:text-5xl font-black mb-6" data-testid="pricing-title">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-6 px-4 sm:px-0" data-testid="pricing-title">
               Get Everything For Less Than <span className="text-gradient">One Day's Earnings</span>
             </h2>
-            <p className="text-xl text-muted-foreground mb-8">Pay once, earn forever. Our customers typically recover this investment in their first week.</p>
+            <p className="text-lg sm:text-xl text-muted-foreground mb-8 px-4 sm:px-0">Pay once, earn forever. Our customers typically recover this investment in their first week.</p>
             
             <div className="glass-card p-6 rounded-lg mb-16 max-w-2xl mx-auto">
               <div className="text-center">
@@ -363,13 +363,13 @@ export default function Landing() {
               </div>
             </div>
 
-            <Card className="glass-card p-8 border-2 border-primary glow-primary max-w-lg mx-auto" data-testid="pricing-card">
+            <Card className="glass-card p-6 sm:p-8 border-2 border-primary glow-primary max-w-lg mx-auto" data-testid="pricing-card">
               <CardContent className="p-0">
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold mb-4">Complete Automation Package</h3>
-                  <div className="flex items-center justify-center space-x-4 mb-6">
-                    <span className="text-3xl text-muted-foreground line-through">₹2,999</span>
-                    <span className="text-6xl font-black text-gradient">₹399</span>
+                <div className="text-center mb-6 sm:mb-8">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-4">Complete Automation Package</h3>
+                  <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4 mb-6">
+                    <span className="text-2xl sm:text-3xl text-muted-foreground line-through">₹2,999</span>
+                    <span className="text-5xl sm:text-6xl font-black text-gradient">₹399</span>
                   </div>
                   <Badge className="bg-green-500/20 text-green-400 mb-6">
                     Save ₹2,600 (87% OFF)
@@ -418,7 +418,7 @@ export default function Landing() {
                   </div>
                 </div>
 
-                <Button className="w-full gradient-primary text-white py-4 text-xl font-bold hover-glow transform transition-all duration-300 hover:scale-105 mb-4" data-testid="pricing-cta">
+                <Button className="w-full gradient-primary text-white py-3 sm:py-4 text-lg sm:text-xl font-bold hover-glow transform transition-all duration-300 hover:scale-105 mb-4" data-testid="pricing-cta">
                   💰 Get Complete System For ₹399
                 </Button>
 
@@ -447,10 +447,10 @@ export default function Landing() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl sm:text-5xl font-black mb-6" data-testid="faq-title">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-6 px-4 sm:px-0" data-testid="faq-title">
               Your Questions <span className="text-gradient">Answered</span>
             </h2>
-            <p className="text-xl text-muted-foreground mb-4">Real questions from real users who are now earning ₹1+ lakh monthly</p>
+            <p className="text-lg sm:text-xl text-muted-foreground mb-4 px-4 sm:px-0">Real questions from real users who are now earning ₹1+ lakh monthly</p>
             <div className="inline-flex items-center space-x-2 glass-card px-4 py-2 rounded-full mb-8">
               <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
               <span className="text-sm text-blue-400 font-semibold">Still have questions? Get instant answers on WhatsApp</span>
@@ -472,7 +472,7 @@ export default function Landing() {
           >
             <Card className="glass-card p-12" data-testid="final-cta">
               <CardContent className="p-0">
-                <h2 className="text-4xl sm:text-5xl font-black mb-6">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-6 px-4 sm:px-0">
                   Last Chance: <span className="text-gradient">₹399 Price</span> Expires Tonight
                 </h2>
                 <p className="text-xl text-muted-foreground mb-4">
@@ -497,11 +497,11 @@ export default function Landing() {
                   </div>
                 </div>
 
-                <Button className="gradient-primary text-white px-12 py-4 text-xl font-bold hover-glow transform transition-all duration-300 hover:scale-105 mb-6" data-testid="final-cta-button">
+                <Button className="gradient-primary text-white px-8 sm:px-12 py-3 sm:py-4 text-lg sm:text-xl font-bold hover-glow transform transition-all duration-300 hover:scale-105 mb-6 w-full sm:w-auto" data-testid="final-cta-button">
                   🚀 Secure My ₹399 Spot Now (47 Left)
                 </Button>
 
-                <div className="flex items-center justify-center space-x-8 text-sm text-muted-foreground flex-wrap gap-4 mb-4">
+                <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-8 text-sm text-muted-foreground mb-4">
                   <div className="flex items-center space-x-2">
                     <Shield className="w-4 h-4 text-green-400" />
                     <span>90-Day Money Back + ₹5K</span>
@@ -555,8 +555,8 @@ export default function Landing() {
 
       {/* Mobile Sticky CTA */}
       <div className="fixed bottom-0 left-0 right-0 md:hidden sticky-cta z-50">
-        <div className="p-4">
-          <Button className="w-full gradient-primary text-white py-3 font-bold text-lg" data-testid="mobile-sticky-cta">
+        <div className="p-3">
+          <Button className="w-full gradient-primary text-white py-3 font-bold text-base" data-testid="mobile-sticky-cta">
             💰 Get ₹399 Package Now!
           </Button>
         </div>

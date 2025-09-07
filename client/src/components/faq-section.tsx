@@ -46,7 +46,7 @@ export default function FaqSection() {
   };
 
   return (
-    <div className="space-y-4" data-testid="faq-section">
+    <div className="space-y-4 px-4 sm:px-0" data-testid="faq-section">
       {faqs.map((faq, index) => (
         <motion.div
           key={index}
@@ -58,11 +58,11 @@ export default function FaqSection() {
         >
           <Card className="glass-card overflow-hidden">
             <button
-              className="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-white/5 transition-colors"
+              className="w-full px-4 sm:px-8 py-4 sm:py-6 text-left flex items-center justify-between hover:bg-white/5 transition-colors"
               onClick={() => toggleFaq(index)}
               data-testid={`faq-question-${index}`}
             >
-              <span className="font-semibold">{faq.question}</span>
+              <span className="font-semibold text-sm sm:text-base pr-2">{faq.question}</span>
               <motion.div
                 animate={{ rotate: openIndex === index ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
@@ -80,8 +80,8 @@ export default function FaqSection() {
                   className="overflow-hidden"
                   data-testid={`faq-answer-${index}`}
                 >
-                  <div className="px-8 pb-6">
-                    <p className="text-muted-foreground">{faq.answer}</p>
+                  <div className="px-4 sm:px-8 pb-4 sm:pb-6">
+                    <p className="text-sm sm:text-base text-muted-foreground">{faq.answer}</p>
                   </div>
                 </motion.div>
               )}
