@@ -1,0 +1,52 @@
+Build me a premium high-converting landing page for a digital product using React + Vite, Tailwind CSS, shadcn/ui components, Framer Motion, and Lucide React icons.
+
+🚀 Product: 
+Complete Automation Package
+💰 Offer: ₹399 (original ₹2,999 — 87% OFF)
+📌 One-time payment • Lifetime access
+
+✅ Includes:
+- Automated daily content creation & posting
+- Multi-niche optimization system
+- Real-time analytics & growth tracking
+- 24/7 technical support
+- Monetization guidance & strategies
+- Instagram & YouTube automation
+- 90-day growth guarantee
+- Multiple revenue stream setup
+
+⚡ Guarantees & Trust Builders:
+- ✓ 90-Day Money Back Guarantee
+- ✓ Instant Access After Purchase
+- ✓ 24/7 Priority Support Included
+
+🎯 Call-to-Action (repeated across sections): 
+“💰 Get ₹399 Package Now!”
+
+🎨 Design Guidelines:
+- Dark premium theme with neon gradient highlights and glassmorphism effects
+- Sticky navigation bar with CTA button
+- Hero section: Big bold headline, subheadline, animated discount badge, price comparison (₹2,999 strikethrough → ₹399 highlight), and CTA button
+- Feature grid: 3x3 responsive cards with icons, staggered entrance animations
+- Urgency section: Countdown timer + “Offer valid today only” note
+- Social proof: Testimonials slider (shadcn/ui Card + Framer Motion)
+- Pricing section: Highlight ₹399 with a glowing border, strikethrough original price
+- FAQ section: Accordion using shadcn/ui with 6–8 common Q&A
+- Sticky bottom CTA bar for mobile view
+- Footer: © 2025 | Built with ❤️ | Social icons (Lucide React)
+
+⚡ Animations (Framer Motion):
+- Hero headline fade + slide in
+- CTA buttons hover with glow + bounce
+- Feature cards staggered reveal
+- Testimonial cards slide transition
+- FAQ accordion smooth expand
+
+📂 Output Requirements:
+- Full code in a single `App.jsx` file
+- Use Tailwind + shadcn/ui imports properly
+- Clean, semantic JSX
+- Mobile-first responsive layout
+- Optimize for conversions (CTA visible everywhere)
+
+Make it look like a modern SaaS landing page with luxury aesthetics and trust-building elements. The final result should feel polished, premium, and ready to launch.
