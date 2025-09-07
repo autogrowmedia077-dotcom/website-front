@@ -21,50 +21,22 @@ import {
   Youtube,
   Twitter,
   Linkedin,
-  ChevronDown,
-  Users,
-  Clock,
-  Gift,
-  Flame,
-  Eye,
-  TrendingDown,
-  AlertTriangle,
-  Crown,
-  ThumbsUp,
-  Award
+  ChevronDown
 } from "lucide-react";
-import CountdownTimer from "../components/countdown-timer";
-import TestimonialSlider from "../components/testimonial-slider";
-import FaqSection from "../components/faq-section";
+import CountdownTimer from "@/components/countdown-timer";
+import TestimonialSlider from "@/components/testimonial-slider";
+import FaqSection from "@/components/faq-section";
 import { useState, useEffect } from "react";
 
 export default function Landing() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [viewersCount, setViewersCount] = useState(147);
-  const [soldCount, setSoldCount] = useState(1847);
-  const [remainingCount, setRemainingCount] = useState(23);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
     };
     window.addEventListener('scroll', handleScroll);
-    
-    // Simulate live counters
-    const viewersInterval = setInterval(() => {
-      setViewersCount(prev => prev + Math.floor(Math.random() * 3 - 1)); // -1 to +1
-    }, 5000);
-    
-    const soldInterval = setInterval(() => {
-      setSoldCount(prev => prev + 1);
-      setRemainingCount(prev => Math.max(0, prev - 1));
-    }, 30000); // Every 30 seconds
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearInterval(viewersInterval);
-      clearInterval(soldInterval);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -241,15 +213,12 @@ export default function Landing() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
           >
-            <div className="space-y-3">
-              <Button 
-                className="gradient-primary text-white px-12 py-4 text-xl font-bold hover-glow transform transition-all duration-300 hover:scale-105 animate-pulse-glow"
-                data-testid="hero-cta"
-              >
-                🔥 SECURE MY PACKAGE + BONUSES NOW!
-              </Button>
-              <p className="text-sm text-yellow-400 font-semibold">Includes ₹15,000 worth of FREE bonuses!</p>
-            </div>
+            <Button 
+              className="gradient-primary text-white px-12 py-4 text-xl font-bold hover-glow transform transition-all duration-300 hover:scale-105"
+              data-testid="hero-cta"
+            >
+              💰 Get ₹399 Package Now!
+            </Button>
             <div className="flex items-center justify-center space-x-6 text-sm text-muted-foreground flex-wrap gap-4">
               <div className="flex items-center space-x-2">
                 <Shield className="w-4 h-4 text-green-400" />
@@ -268,31 +237,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Live Social Proof Section */}
-      <section className="py-8 px-4 sm:px-6 lg:px-8 border-b border-border">
-        <div className="max-w-7xl mx-auto">
-          <motion.div 
-            className="flex items-center justify-center space-x-8 flex-wrap gap-6 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="flex items-center space-x-3 glass-card px-6 py-3 rounded-full" data-testid="live-viewers">
-              <Eye className="w-5 h-5 text-red-400 animate-pulse" />
-              <span className="text-sm font-semibold">{viewersCount} people viewing now</span>
-            </div>
-            <div className="flex items-center space-x-3 glass-card px-6 py-3 rounded-full" data-testid="sold-count">
-              <ThumbsUp className="w-5 h-5 text-green-400" />
-              <span className="text-sm font-semibold">{soldCount.toLocaleString()} packages sold</span>
-            </div>
-            <div className="flex items-center space-x-3 glass-card px-6 py-3 rounded-full border border-red-500/30" data-testid="remaining-count">
-              <AlertTriangle className="w-5 h-5 text-red-400 animate-pulse" />
-              <span className="text-sm font-semibold text-red-400">Only {remainingCount} left at this price!</span>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Urgency Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
@@ -302,13 +246,7 @@ export default function Landing() {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <div className="glass-card p-8 border border-red-500/30 mb-8">
-              <div className="text-center mb-6">
-                <h3 className="text-3xl font-bold mb-2 text-red-400">🔥 FLASH SALE ENDING SOON! 🔥</h3>
-                <p className="text-lg text-muted-foreground">This {remainingCount < 10 ? 'FINAL' : 'LIMITED'} offer expires at midnight. Don't miss out!</p>
-              </div>
-              <CountdownTimer />
-            </div>
+            <CountdownTimer />
           </motion.div>
         </div>
       </section>
@@ -377,99 +315,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Limited Time Bonuses Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-900/10 to-blue-900/10">
-        <div className="max-w-6xl mx-auto">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <Badge className="bg-yellow-500/20 text-yellow-400 mb-4 text-lg px-6 py-2" data-testid="bonus-badge">
-              🎁 LIMITED TIME BONUSES
-            </Badge>
-            <h2 className="text-4xl sm:text-5xl font-black mb-6" data-testid="bonus-title">
-              Get These <span className="text-gradient">₹15,000 Worth</span> Bonuses FREE!
-            </h2>
-            <p className="text-xl text-muted-foreground">Act now and get these exclusive bonuses absolutely free with your package</p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {[
-              {
-                icon: Crown,
-                title: "VIP Success Coaching Call",
-                value: "₹5,000",
-                description: "1-on-1 strategy session with our automation expert to maximize your results",
-                gradient: "from-yellow-400 to-orange-400"
-              },
-              {
-                icon: Bot,
-                title: "Premium Content Templates",
-                value: "₹3,000",
-                description: "200+ high-converting content templates for all major platforms",
-                gradient: "from-purple-400 to-pink-400"
-              },
-              {
-                icon: TrendingUp,
-                title: "Advanced Analytics Dashboard",
-                value: "₹4,000",
-                description: "Professional tracking tools used by 6-figure influencers",
-                gradient: "from-green-400 to-blue-400"
-              },
-              {
-                icon: Users,
-                title: "Exclusive VIP Community",
-                value: "₹3,000",
-                description: "Access to our private mastermind group of successful entrepreneurs",
-                gradient: "from-blue-400 to-purple-400"
-              }
-            ].map((bonus, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                data-testid={`bonus-item-${index}`}
-              >
-                <Card className="glass-card p-6 h-full hover-glow border border-yellow-500/30">
-                  <CardContent className="p-0">
-                    <div className="flex items-start space-x-4">
-                      <div className={`w-14 h-14 bg-gradient-to-r ${bonus.gradient} rounded-lg flex items-center justify-center flex-shrink-0`}>
-                        <bonus.icon className="w-7 h-7 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-2">
-                          <h3 className="text-xl font-bold">{bonus.title}</h3>
-                          <Badge className="bg-green-500/20 text-green-400">{bonus.value}</Badge>
-                        </div>
-                        <p className="text-muted-foreground">{bonus.description}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-          
-          <motion.div 
-            className="text-center mt-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <div className="glass-card p-8 border border-yellow-500/30">
-              <h3 className="text-2xl font-bold mb-4">Total Bonus Value: <span className="text-gradient text-3xl">₹15,000</span></h3>
-              <p className="text-lg text-yellow-400 font-semibold">Yours FREE when you order today - but only for the first {remainingCount} customers!</p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Pricing Section */}
       <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
@@ -515,39 +360,14 @@ export default function Landing() {
                   ))}
                 </ul>
 
-                <Button className="w-full gradient-primary text-white py-4 text-xl font-bold hover-glow transform transition-all duration-300 hover:scale-105 mb-4 animate-pulse-glow" data-testid="pricing-cta">
-                  🔥 CLAIM MY ₹399 PACKAGE + BONUSES NOW!
+                <Button className="w-full gradient-primary text-white py-4 text-xl font-bold hover-glow transform transition-all duration-300 hover:scale-105 mb-4" data-testid="pricing-cta">
+                  💰 Get ₹399 Package Now!
                 </Button>
-                
-                <div className="text-center mb-4">
-                  <p className="text-sm text-yellow-400 font-semibold">⚡ Instant access + ₹15,000 bonuses FREE ⚡</p>
-                </div>
-
-                <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4 mb-4">
-                  <h4 className="font-bold text-green-400 mb-2 flex items-center">
-                    <Award className="w-5 h-5 mr-2" />
-                    TRIPLE GUARANTEE PROTECTION
-                  </h4>
-                  <ul className="text-sm space-y-2">
-                    <li className="flex items-center space-x-2">
-                      <Check className="w-4 h-4 text-green-400" />
-                      <span>90-Day Money Back Guarantee</span>
-                    </li>
-                    <li className="flex items-center space-x-2">
-                      <Check className="w-4 h-4 text-green-400" />
-                      <span>Growth Guarantee or Full Refund</span>
-                    </li>
-                    <li className="flex items-center space-x-2">
-                      <Check className="w-4 h-4 text-green-400" />
-                      <span>Lifetime Support Guarantee</span>
-                    </li>
-                  </ul>
-                </div>
 
                 <div className="flex items-center justify-center space-x-6 text-sm text-muted-foreground">
                   <div className="flex items-center space-x-2">
                     <Shield className="w-4 h-4 text-green-400" />
-                    <span>SSL Secure Payment</span>
+                    <span>Secure Payment</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Zap className="w-4 h-4 text-yellow-400" />
@@ -610,12 +430,9 @@ export default function Landing() {
                   </div>
                 </div>
 
-                <div className="space-y-4 mb-6">
-                  <Button className="gradient-primary text-white px-12 py-4 text-xl font-bold hover-glow transform transition-all duration-300 hover:scale-105 animate-bounce-glow" data-testid="final-cta-button">
-                    🔥 LAST CHANCE: Get ₹399 Package + ₹15,000 Bonuses!
-                  </Button>
-                  <p className="text-red-400 font-bold animate-pulse">⚠️ Only {remainingCount} packages left at this price!</p>
-                </div>
+                <Button className="gradient-primary text-white px-12 py-4 text-xl font-bold hover-glow transform transition-all duration-300 hover:scale-105 mb-6" data-testid="final-cta-button">
+                  💰 Get ₹399 Package Now!
+                </Button>
 
                 <div className="flex items-center justify-center space-x-8 text-sm text-muted-foreground flex-wrap gap-4">
                   <div className="flex items-center space-x-2">
@@ -669,12 +486,9 @@ export default function Landing() {
       {/* Mobile Sticky CTA */}
       <div className="fixed bottom-0 left-0 right-0 md:hidden sticky-cta z-50">
         <div className="p-4">
-          <div className="space-y-2">
-            <Button className="w-full gradient-primary text-white py-3 font-bold text-lg animate-pulse-glow" data-testid="mobile-sticky-cta">
-              🔥 SECURE ₹399 + BONUSES!
-            </Button>
-            <p className="text-xs text-center text-yellow-400 font-semibold">Only {remainingCount} left!</p>
-          </div>
+          <Button className="w-full gradient-primary text-white py-3 font-bold text-lg" data-testid="mobile-sticky-cta">
+            💰 Get ₹399 Package Now!
+          </Button>
         </div>
       </div>
     </div>
