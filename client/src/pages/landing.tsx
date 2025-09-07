@@ -23,9 +23,9 @@ import {
   Linkedin,
   ChevronDown
 } from "lucide-react";
-import CountdownTimer from "@/components/countdown-timer";
-import TestimonialSlider from "@/components/testimonial-slider";
-import FaqSection from "@/components/faq-section";
+import CountdownTimer from "../components/countdown-timer";
+import TestimonialSlider from "../components/testimonial-slider";
+import FaqSection from "../components/faq-section";
 import { useState, useEffect } from "react";
 
 export default function Landing() {
