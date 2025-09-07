@@ -448,9 +448,13 @@ export default function Landing() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl sm:text-5xl font-black mb-6" data-testid="faq-title">
-              Frequently Asked <span className="text-gradient">Questions</span>
+              Your Questions <span className="text-gradient">Answered</span>
             </h2>
-            <p className="text-xl text-muted-foreground">Everything you need to know about our automation package</p>
+            <p className="text-xl text-muted-foreground mb-4">Real questions from real users who are now earning ₹1+ lakh monthly</p>
+            <div className="inline-flex items-center space-x-2 glass-card px-4 py-2 rounded-full mb-8">
+              <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+              <span className="text-sm text-blue-400 font-semibold">Still have questions? Get instant answers on WhatsApp</span>
+            </div>
           </motion.div>
 
           <FaqSection />
