@@ -21,7 +21,17 @@ import {
   Youtube,
   Twitter,
   Linkedin,
-  ChevronDown
+  ChevronDown,
+  Users,
+  Clock,
+  Gift,
+  Flame,
+  Eye,
+  TrendingDown,
+  AlertTriangle,
+  Crown,
+  ThumbsUp,
+  Award
 } from "lucide-react";
 import CountdownTimer from "../components/countdown-timer";
 import TestimonialSlider from "../components/testimonial-slider";
@@ -30,13 +40,31 @@ import { useState, useEffect } from "react";
 
 export default function Landing() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [viewersCount, setViewersCount] = useState(147);
+  const [soldCount, setSoldCount] = useState(1847);
+  const [remainingCount, setRemainingCount] = useState(23);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
     };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    // Simulate live counters
+    const viewersInterval = setInterval(() => {
+      setViewersCount(prev => prev + Math.floor(Math.random() * 3 - 1)); // -1 to +1
+    }, 5000);
+    
+    const soldInterval = setInterval(() => {
+      setSoldCount(prev => prev + 1);
+      setRemainingCount(prev => Math.max(0, prev - 1));
+    }, 30000); // Every 30 seconds
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearInterval(viewersInterval);
+      clearInterval(soldInterval);
+    };
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -237,6 +265,31 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* Live Social Proof Section */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 border-b border-border">
+        <div className="max-w-7xl mx-auto">
+          <motion.div 
+            className="flex items-center justify-center space-x-8 flex-wrap gap-6 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="flex items-center space-x-3 glass-card px-6 py-3 rounded-full" data-testid="live-viewers">
+              <Eye className="w-5 h-5 text-red-400 animate-pulse" />
+              <span className="text-sm font-semibold">{viewersCount} people viewing now</span>
+            </div>
+            <div className="flex items-center space-x-3 glass-card px-6 py-3 rounded-full" data-testid="sold-count">
+              <ThumbsUp className="w-5 h-5 text-green-400" />
+              <span className="text-sm font-semibold">{soldCount.toLocaleString()} packages sold</span>
+            </div>
+            <div className="flex items-center space-x-3 glass-card px-6 py-3 rounded-full border border-red-500/30" data-testid="remaining-count">
+              <AlertTriangle className="w-5 h-5 text-red-400 animate-pulse" />
+              <span className="text-sm font-semibold text-red-400">Only {remainingCount} left at this price!</span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Urgency Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
@@ -246,7 +299,13 @@ export default function Landing() {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <CountdownTimer />
+            <div className="glass-card p-8 border border-red-500/30 mb-8">
+              <div className="text-center mb-6">
+                <h3 className="text-3xl font-bold mb-2 text-red-400">🔥 FLASH SALE ENDING SOON! 🔥</h3>
+                <p className="text-lg text-muted-foreground">This {remainingCount < 10 ? 'FINAL' : 'LIMITED'} offer expires at midnight. Don't miss out!</p>
+              </div>
+              <CountdownTimer />
+            </div>
           </motion.div>
         </div>
       </section>
