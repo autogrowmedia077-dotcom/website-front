@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import FakeToast from "@/components/Faketoast";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
@@ -63,7 +64,7 @@ export default function Landing() {
   
     try {
       // 1. Create order on backend
-      const orderRes = await fetch("http://localhost:5000/create-order", {
+      const orderRes = await fetch("https://api.pinnacleplus.store/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount: 399 }),
@@ -71,7 +72,7 @@ export default function Landing() {
       const orderData = await orderRes.json();
   
       const options = {
-        key: "rzp_test_u7t6zEMNRtcXwt", // Your key
+        key: "rzp_live_REeA7iClZnrmEt", // Your key
         amount: orderData.amount,
         currency: orderData.currency,
         name: "PinnaclePlus",
@@ -79,7 +80,7 @@ export default function Landing() {
         order_id: orderData.orderId,
         handler: async function (response: any) {
           // 2. Verify payment on backend
-          const verifyRes = await fetch("http://localhost:5000/verify", {
+          const verifyRes = await fetch("https://api.pinnacleplus.store/verify", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(response), // razorpay_order_id, razorpay_payment_id, razorpay_signature
@@ -614,7 +615,7 @@ export default function Landing() {
             <div className="text-muted-foreground text-sm" data-testid="footer-copyright">
               © 2025 PinnaclePlus | Built with ❤️ by Vedant Chalke | All rights reserved
             </div>
-
+            <FakeToast />
             {/* Business Info */}
             <div className="mt-10 max-w-2xl mx-auto text-left sm:text-center">
               <div className="glass-card border border-border/50 rounded-xl p-4 sm:p-6">
