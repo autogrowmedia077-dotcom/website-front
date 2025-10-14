@@ -611,11 +611,31 @@ export default function Landing() {
                 <Linkedin className="w-6 h-6" />
               </a>
             </div>
+
+            {/* Added Legal Links */}
+            <div className="flex justify-center space-x-6 mb-6 text-sm">
+              <a 
+                href="/privacy" 
+                className="text-muted-foreground hover:text-foreground transition-colors" 
+                data-testid="footer-privacy"
+              >
+                Privacy Policy
+              </a>
+              <a 
+                href="/about" 
+                className="text-muted-foreground hover:text-foreground transition-colors" 
+                data-testid="footer-about"
+              >
+                About Us
+              </a>
+            </div>
             
             <div className="text-muted-foreground text-sm" data-testid="footer-copyright">
               © 2025 PinnaclePlus | Built with ❤️ by Vedant Chalke | All rights reserved
             </div>
+
             <FakeToast />
+
             {/* Business Info */}
             <div className="mt-10 max-w-2xl mx-auto text-left sm:text-center">
               <div className="glass-card border border-border/50 rounded-xl p-4 sm:p-6">
