@@ -1,3 +1,4 @@
+
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -7,6 +8,7 @@ import Landing from "@/pages/landing";
 import AboutUs from "./pages/AboutUs";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ReturnsPolicy from "./pages/ReturnsPolicy";
+import Terms from "./pages/Terms";
 
 function Router() {
   return (
@@ -15,6 +17,7 @@ function Router() {
       <Route path="/about" component={AboutUs} />
       <Route path="/privacy" component={PrivacyPolicy} />
       <Route path="/returns" component={ReturnsPolicy} />
+      <Route path="/terms" component={Terms} />
       <Route component={Landing} />
     </Switch>
   );

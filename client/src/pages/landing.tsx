@@ -613,22 +613,37 @@ export default function Landing() {
             </div>
 
             {/* Added Legal Links */}
-            <div className="flex justify-center space-x-6 mb-6 text-sm">
-              <a 
-                href="/privacy" 
-                className="text-muted-foreground hover:text-foreground transition-colors" 
-                data-testid="footer-privacy"
-              >
-                Privacy Policy
-              </a>
-              <a 
-                href="/about" 
-                className="text-muted-foreground hover:text-foreground transition-colors" 
-                data-testid="footer-about"
-              >
-                About Us
-              </a>
-            </div>
+            <div className="flex flex-wrap justify-center space-x-6 mb-6 text-sm">
+  <a 
+    href="/privacy" 
+    className="text-muted-foreground hover:text-foreground transition-colors" 
+    data-testid="footer-privacy"
+  >
+    Privacy Policy
+  </a>
+  <a 
+    href="/terms" 
+    className="text-muted-foreground hover:text-foreground transition-colors" 
+    data-testid="footer-terms"
+  >
+    Terms & Conditions
+  </a>
+  <a 
+    href="/returns" 
+    className="text-muted-foreground hover:text-foreground transition-colors" 
+    data-testid="footer-returns"
+  >
+    Returns Policy
+  </a>
+  <a 
+    href="/about" 
+    className="text-muted-foreground hover:text-foreground transition-colors" 
+    data-testid="footer-about"
+  >
+    About Us
+  </a>
+</div>
+
             
             <div className="text-muted-foreground text-sm" data-testid="footer-copyright">
               © 2025 PinnaclePlus | Built with ❤️ by Vedant Chalke | All rights reserved
