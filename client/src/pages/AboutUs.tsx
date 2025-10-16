@@ -1,72 +1,189 @@
-import React from 'react';
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Rocket, Bot, Users, Target, Shield, Zap } from "lucide-react";
 
-const AboutUs: React.FC = () => {
+export default function About() {
   return (
-    <div className="container mx-auto px-4 py-12 text-white">
-      <h1 className="text-4xl font-bold mb-6">About PinnaclePlus</h1>
-      
-      <p className="text-lg mb-4">
-        Welcome to **PinnaclePlus** — your partner in truly **automating social growth**. We specialize in helping creators, entrepreneurs, and businesses scale their social presence on platforms like Instagram & YouTube — without the burnout or endless manual effort.
-      </p>
-      
-      <p className="text-lg mb-4">
-        We provide a full-stack automation solution: from **AI-powered content generation**, to **auto-posting**, to **analytics and optimization**. Our mission is to simplify your digital growth process so you can focus on *vision*, while we handle *execution* behind the scenes.  
-        (Yes — real results, zero content droughts.)
-      </p>
-      
-      <h2 className="text-2xl font-semibold mt-8 mb-4">Our Story & Vision</h2>
-      <p className="mb-4">
-        We started PinnaclePlus when we recognized a gap: most creators and businesses struggle with consistency, content ideation, or scaling across multiple platforms. Rather than forcing people into a rigid “content schedule,” we built a system that adapts to *you* — delivering daily content, metrics, and monetization paths, all in one place.
-      </p>
-      
-      <p className="mb-4">
-        Today, over **5,000+ proactive users** trust us to grow their digital footprint. Our goal is to democratize automation — to make scaling an online business accessible, affordable, and stress-free.
-      </p>
-      
-      <h2 className="text-2xl font-semibold mt-8 mb-4">What We Offer</h2>
-      <ul className="list-disc list-inside space-y-2 mb-6 text-lg">
-        <li>AI-driven content creation, scheduled and posted across Instagram, YouTube, and more</li>
-        <li>Multi-niche targeting and optimization to help your content reach ideal audiences</li>
-        <li>Analytics dashboard with real-time insights and growth recommendations</li>
-        <li>Monetization blueprints — turn your presence into revenue streams</li>
-        <li>Guaranteed 90-day growth or your money back (yes, we put skin in the game)</li>
-        <li>Dedicated support — from onboarding to scaling, we’re with you every step</li>
-      </ul>
-      
-      <h2 className="text-2xl font-semibold mt-8 mb-4">Our Core Values</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div>
-          <h3 className="font-semibold">Integrity</h3>
-          <p>We believe in transparent pricing, honest outcomes, and no hidden agendas.</p>
-        </div>
-        <div>
-          <h3 className="font-semibold">Innovation</h3>
-          <p>We continuously evolve our tools and systems to stay ahead in the pace of digital change.</p>
-        </div>
-        <div>
-          <h3 className="font-semibold">Empathy</h3>
-          <p>Your success is our success. We listen, iterate, and improve based on real feedback.</p>
-        </div>
-        <div>
-          <h3 className="font-semibold">Accountability</h3>
-          <p>We set expectations — and we deliver. That’s why we offer risk-free guarantees.</p>
-        </div>
+    <div className="min-h-screen bg-background text-foreground pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto text-center mb-16">
+        <motion.h1
+          className="text-4xl sm:text-5xl lg:text-6xl font-black mb-6"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          About <span className="text-gradient">PinnaclePlus</span>
+        </motion.h1>
+        <motion.p
+          className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          We help entrepreneurs and creators automate their growth and turn their
+          social media presence into a ₹1 Lakh+/month business — using AI, strategy,
+          and proven automation systems.
+        </motion.p>
       </div>
-      
-      <h2 className="text-2xl font-semibold mt-8 mb-4">Meet the Team</h2>
-      <p className="mb-4">
-        Behind the scenes, we are a lean but dedicated team of automators, marketers, developers, and creators. Each one of us is deeply invested in your success — because we’ve been in your shoes: juggling content plans, trying to scale, trying to get traction.
-      </p>
-      
-      <h2 className="text-2xl font-semibold mt-8 mb-4">Join Us on the Journey</h2>
-      <p className="mb-4">
-        Whether you're just starting out or already generating traction, PinnaclePlus is designed to be your launchpad. Automate your growth, reclaim your time, and finally build the kind of steady, scalable online presence you’ve always wanted.
-      </p>
-      <p>
-        <strong>Ready to scale?</strong> Be part of the 5,000+ creators turning their social accounts into real income engines. Let’s build your digital future — together.
-      </p>
+
+      {/* Our Story Section */}
+      <section className="max-w-5xl mx-auto mb-20">
+        <Card className="glass-card p-8 sm:p-12">
+          <CardContent className="p-0">
+            <motion.h2
+              className="text-3xl font-bold mb-4 text-gradient"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              Our Story
+            </motion.h2>
+            <motion.p
+              className="text-muted-foreground leading-relaxed text-base sm:text-lg"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              PinnaclePlus was founded by a small team of creators, marketers, and
+              engineers under <strong>Gadget Glitz</strong> — a long-established
+              digital business based in Jabalpur, India.  
+              <br /><br />
+              We realized most entrepreneurs spend endless hours creating, posting,
+              and analyzing content manually — instead of growing their brand.  
+              So we built a system that automates it all.  
+              Today, over <strong>5,000+ users</strong> trust PinnaclePlus to run their
+              digital growth 24/7 while they focus on what truly matters — building
+              their dream business.
+            </motion.p>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Mission Section */}
+      <section className="max-w-5xl mx-auto mb-20">
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            Our <span className="text-gradient">Mission</span>
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+            To empower 100,000+ entrepreneurs to achieve financial freedom through
+            automation, content, and data-driven growth — all without burnout.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {[
+            {
+              icon: Rocket,
+              title: "Empower Entrepreneurs",
+              text: "Helping business owners use AI to scale faster with less effort.",
+            },
+            {
+              icon: Bot,
+              title: "Build Smart Automation",
+              text: "Designing systems that think, create, and post — automatically.",
+            },
+            {
+              icon: Target,
+              title: "Deliver Measurable Results",
+              text: "Every feature we build is backed by data and proven ROI.",
+            },
+          ].map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <Card className="glass-card p-6 hover-glow h-full">
+                <CardContent className="p-0">
+                  <div className="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center mb-4">
+                    <item.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground text-sm">{item.text}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section className="max-w-5xl mx-auto mb-20">
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            Our <span className="text-gradient">Core Values</span>
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+            These values guide every product, campaign, and customer interaction we create.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {[
+            { icon: Users, title: "Community First", desc: "We grow together. Your success is our success." },
+            { icon: Shield, title: "Transparency", desc: "Clear pricing, honest support, zero hidden terms." },
+            { icon: Zap, title: "Innovation", desc: "We move fast, experiment boldly, and improve daily." },
+          ].map((value, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <Card className="glass-card p-6 hover-glow h-full">
+                <CardContent className="p-0">
+                  <div className="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center mb-4">
+                    <value.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">{value.title}</h3>
+                  <p className="text-muted-foreground text-sm">{value.desc}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Business Info */}
+      <section className="max-w-5xl mx-auto">
+        <Card className="glass-card p-8 sm:p-12">
+          <CardContent className="p-0 text-center">
+            <h2 className="text-2xl font-bold mb-4 text-gradient">Our Business</h2>
+            <p className="text-muted-foreground mb-6">
+              <strong>Gadget Glitz</strong> — Mobile Accessories Store  
+              <br />
+              Registered business expanding into AI automation and digital growth systems.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-muted-foreground max-w-xl mx-auto">
+              <div>🏪 Visit Our Store</div>
+              <div>📍 31, Indra Market</div>
+              <div>🏙️ Jabalpur, Madhya Pradesh</div>
+              <div>📮 482001</div>
+            </div>
+            <p className="text-xs text-muted-foreground mt-4">
+              © 2025 PinnaclePlus | All Rights Reserved
+            </p>
+          </CardContent>
+        </Card>
+      </section>
     </div>
   );
-};
-
-export default AboutUs;
+}
