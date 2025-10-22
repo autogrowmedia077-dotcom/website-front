@@ -28,15 +28,6 @@ import CountdownTimer from "@/components/countdown-timer";
 import TestimonialSlider from "@/components/testimonial-slider";
 import FaqSection from "@/components/faq-section";
 import { useState, useEffect } from "react";
-const loadRazorpayScript = () => {
-  return new Promise((resolve) => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.onload = () => resolve(true);
-    script.onerror = () => resolve(false);
-    document.body.appendChild(script);
-  });
-};
 export default function Landing() {
   const [isScrolled, setIsScrolled] = useState(false);
 
