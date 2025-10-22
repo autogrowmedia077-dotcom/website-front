@@ -57,7 +57,7 @@ const handlePayment = async () => {
 
     if (orderData.paymentSessionId) {
       // Redirect to Cashfree hosted checkout using payment_session_id
-      const checkoutUrl = `https://sandbox.cashfree.com/checkout/post/${orderData.paymentSessionId}`;
+      const checkoutUrl = `https://cashfree.com/checkout/post/${orderData.paymentSessionId}`;
       window.location.href = checkoutUrl;
     } else {
       alert("Failed to create order. Please try again.");
