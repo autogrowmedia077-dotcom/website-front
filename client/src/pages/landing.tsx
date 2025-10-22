@@ -52,38 +52,9 @@ const [cashfree, setCashfree] = useState<any>(null);
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
-const handlePayment = async () => {
-  try {
-    // Step 1: Create order via backend
-    const orderRes = await fetch("https://api.pinnacleplus.store/create-order", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: 399 }),
-    });
-
-    const orderData = await orderRes.json();
-
-    if (!orderData.paymentSessionId) {
-      alert("Failed to create order. Please try again.");
-      return;
-    }
-
-    // Step 2: Trigger Cashfree checkout
-    if (!cashfree) {
-      alert("Payment system is still loading. Please wait a moment.");
-      return;
-    }
-
-    const checkoutOptions = {
-      paymentSessionId: orderData.paymentSessionId,
-      redirectTarget: "_self", // same tab
-    };
-
-    cashfree.checkout(checkoutOptions);
-  } catch (err) {
-    console.error("Payment failed:", err);
-    alert("Payment failed. Try again.");
-  }
+const handlePayment = () => {
+  // Open the hosted Cashfree payment page
+  window.location.href = "https://payments.cashfree.com/forms/pinnacleplus";
 };
 
   
