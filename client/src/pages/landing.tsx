@@ -28,9 +28,10 @@ import CountdownTimer from "@/components/countdown-timer";
 import TestimonialSlider from "@/components/testimonial-slider";
 import FaqSection from "@/components/faq-section";
 import { useState, useEffect } from "react";
+import { load } from "@cashfreepayments/cashfree-js";
 export default function Landing() {
   const [isScrolled, setIsScrolled] = useState(false);
-
+const [cashfree, setCashfree] = useState<any>(null);
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 100);
@@ -38,7 +39,13 @@ export default function Landing() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
+ useEffect(() => {
+  const initializeSDK = async () => {
+    const cf = await load({ mode: "production" }); // "sandbox" for testing
+    setCashfree(cf);
+  };
+  initializeSDK();
+}, []);
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -47,6 +54,7 @@ export default function Landing() {
   };
 const handlePayment = async () => {
   try {
+    // Step 1: Create order via backend
     const orderRes = await fetch("https://api.pinnacleplus.store/create-order", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -55,15 +63,25 @@ const handlePayment = async () => {
 
     const orderData = await orderRes.json();
 
-    if (orderData.paymentSessionId) {
-      // Redirect to Cashfree hosted checkout using payment_session_id
-      const checkoutUrl = `https://cashfree.com/checkout/post/${orderData.paymentSessionId}`;
-      window.location.href = checkoutUrl;
-    } else {
+    if (!orderData.paymentSessionId) {
       alert("Failed to create order. Please try again.");
+      return;
     }
+
+    // Step 2: Trigger Cashfree checkout
+    if (!cashfree) {
+      alert("Payment system is still loading. Please wait a moment.");
+      return;
+    }
+
+    const checkoutOptions = {
+      paymentSessionId: orderData.paymentSessionId,
+      redirectTarget: "_self", // same tab
+    };
+
+    cashfree.checkout(checkoutOptions);
   } catch (err) {
-    console.error(err);
+    console.error("Payment failed:", err);
     alert("Payment failed. Try again.");
   }
 };
