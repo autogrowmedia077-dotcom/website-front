@@ -54,58 +54,27 @@ export default function Landing() {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
-  const handlePayment = async () => {
-    const res = await loadRazorpayScript();
-  
-    if (!res) {
-      alert("Razorpay SDK failed to load. Are you online?");
-      return;
+const handlePayment = async () => {
+  try {
+    const orderRes = await fetch("https://api.pinnacleplus.store/create-order", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount: 399 }),
+    });
+
+    const orderData = await orderRes.json();
+
+    if (orderData.orderUrl) {
+      // Redirect to Cashfree’s hosted checkout
+      window.location.href = orderData.orderUrl;
+    } else {
+      alert("Failed to create order. Please try again.");
     }
-  
-    try {
-      // 1. Create order on backend
-      const orderRes = await fetch("https://api.pinnacleplus.store/create-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: 399 }),
-      });
-      const orderData = await orderRes.json();
-  
-      const options = {
-        key: "rzp_live_REeA7iClZnrmEt", // Your key
-        amount: orderData.amount,
-        currency: orderData.currency,
-        name: "PinnaclePlus",
-        description: "Complete Automation Package",
-        order_id: orderData.orderId,
-        handler: async function (response: any) {
-          // 2. Verify payment on backend
-          const verifyRes = await fetch("https://api.pinnacleplus.store/verify", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(response), // razorpay_order_id, razorpay_payment_id, razorpay_signature
-          });
-  
-          const verifyData = await verifyRes.json();
-  
-          if (verifyData.status === "success") {
-            // 3. Redirect on successful verification
-            window.location.href = "https://app-pinnacleplus.store";
-          } else {
-            alert("Payment verification failed!");
-          }
-        },
-        prefill: { name: "", email: "", contact: "" },
-        theme: { color: "#4f46e5" },
-      };
-  
-      const paymentObject = new (window as any).Razorpay(options);
-      paymentObject.open();
-    } catch (err) {
-      console.error(err);
-      alert("Payment failed. Try again.");
-    }
-  };
+  } catch (err) {
+    console.error(err);
+    alert("Payment failed. Try again.");
+  }
+};
   
   const features = [
     {
