@@ -55,9 +55,10 @@ const handlePayment = async () => {
 
     const orderData = await orderRes.json();
 
-    if (orderData.orderUrl) {
-      // Redirect to Cashfree’s hosted checkout
-      window.location.href = orderData.orderUrl;
+    if (orderData.paymentSessionId) {
+      // Redirect to Cashfree hosted checkout using payment_session_id
+      const checkoutUrl = `https://sandbox.cashfree.com/checkout/post/${orderData.paymentSessionId}`;
+      window.location.href = checkoutUrl;
     } else {
       alert("Failed to create order. Please try again.");
     }
@@ -66,6 +67,7 @@ const handlePayment = async () => {
     alert("Payment failed. Try again.");
   }
 };
+
   
   const features = [
     {
