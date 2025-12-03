@@ -9,6 +9,7 @@ import AboutUs from "./pages/AboutUs";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ReturnsPolicy from "./pages/ReturnsPolicy";
 import Terms from "./pages/Terms";
+import PaymentConfirmation from "./pages/PaymentConfirmation";
 
 function Router() {
   return (
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/privacy" component={PrivacyPolicy} />
       <Route path="/returns" component={ReturnsPolicy} />
       <Route path="/terms" component={Terms} />
+      <Route path="/payment-confirmation" component={PaymentConfirmation} />
       <Route component={Landing} />
     </Switch>
   );
