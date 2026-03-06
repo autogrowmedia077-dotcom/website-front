@@ -54,7 +54,7 @@ const [cashfree, setCashfree] = useState<any>(null);
   };
 const handlePayment = () => {
   // Open the hosted Cashfree payment page
-  window.location.href = "https://payments.cashfree.com/forms/pinnacleplus";
+  window.location.href = "https://payments.cashfree.com/forms?code=pinnacleplustarter";
 };
 
   
@@ -597,7 +597,7 @@ const handlePayment = () => {
 
             
             <div className="text-muted-foreground text-sm" data-testid="footer-copyright">
-              © 2025 PinnaclePlus | Built with ❤️ by Vedant Chalke | All rights reserved
+              © 2026 PinnaclePlus | Built with ❤️ by Vuce | All rights reserved
             </div>
 
             <FakeToast />
